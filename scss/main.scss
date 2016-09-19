@@ -1,0 +1,230 @@
+// - - - - - - - mixins - - - - - - - //
+@mixin centerer($position:absolute) {
+    position: $position;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin v-center($position:relative) {
+    position: $position;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin h-center($position:relative) {
+    position: $position;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@mixin bottom($position:relative) {
+    position: $position;
+    top: 100%;
+    transform: translateY(-105%);
+}
+
+@mixin inline($float:left) {
+    display: inline-block;
+    float: $float;
+    position: relative;
+}
+
+@mixin bg_img($url, $size, $position) {
+    background: url($url);
+    background-size: $size;
+    background-position: $position;
+}
+
+// - - - - - - - variables - - - - - - - //
+$pink: #e273e4;
+$white: #ffffff;
+$grey: #414148;
+$green: #78f48a;
+$purple: #ba66e7;
+$teal: #58f2f4;
+// - - - - - - - global styles - - - - - - - //
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    h1,
+    h2 {
+        font-family: 'Lobster', cursive;
+    }
+}
+
+cf:before,
+cf:after {
+    content: "";
+    display: table;
+}
+
+cf:after {
+    clear: both;
+}
+
+.wrapper {
+    width: 80%;
+    max-width: 1000px;
+    @include h-center;
+}
+
+section {
+    position: relative;
+    width: 100%;
+}
+
+.logo {
+    float: left;
+    color: $green;
+    background-color: $grey;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 2.25em;
+}
+
+// - - - - - - - body styles - - - - - - - //
+.banner {
+    padding: 5em 0;
+    height: 30em;
+    h1 {
+        color: $grey;
+        text-align: right;
+        font-size: 6em;
+        @include inline;
+        float: right;
+        margin: 0;
+        transform: translateY(-8px);
+        @media (max-width: 768px) {
+            font-size: 4em;
+        }
+    }
+}
+
+.work {
+    background: $grey;
+    padding: 6em 0;
+    .card {
+        margin: 15px 0;
+        background: $white;
+        color: $white;
+        border-radius: .35em;
+        position: relative;
+        height: 29em;
+    }
+    .card:hover {
+        box-shadow: 0 5px 30px 0 black;
+        transition: .2s ease-in-out;
+        background-size: 110%;
+    }
+    .tall {
+        height: 45em;
+        .card_2,
+        .card_3 {
+            height: 43em;
+        }
+    }
+    .text_wrapper {
+        @include v-center;
+        padding-left: 2em;
+        h2 {
+            margin: 0;
+            font-size: 6em;
+        }
+        p {
+            margin: 0;
+            padding-left: .25em;
+            font-size: 2em;
+        }
+    }
+    .card_1 {
+        @include bg_img("../images/image_1_child.png", 100%, center top);
+        background-repeat: no-repeat;
+    }
+    .card_2 {
+        @include bg_img("../images/image_2_child.png", 100%, center bottom);
+        background-repeat: no-repeat;
+    }
+    .card_3 {
+        @include bg_img("../images/image_3_child.png", 100%, center bottom);
+        background-repeat: no-repeat;
+    }
+    .trans {
+        background-color: transparent;
+        h1 {
+            color: darkgrey;
+            @include centerer(absolute);
+            @media (max-width: 768px) {
+                white-space: nowrap;
+            }
+        }
+        h1:hover {
+            color: lighten(darkgray, 15%);
+        }
+    }
+    .trans:hover {
+        box-shadow: none;
+    }
+    .pink {
+        background-color: $pink;
+        opacity: .9;
+    }
+    .green {
+        background-color: $green;
+    }
+    .purple {
+        background-color: $purple;
+    }
+    .teal {
+        background-color: $teal;
+    }
+}
+
+footer {
+    position: relative;
+    height: 13em;
+    .info {
+        position: relative;
+        @include centerer;
+        width: 100%;
+        .logo {
+            top: -50;
+            font-size: 3.3em;
+            margin: 0;
+            padding: 0;
+        }
+        .email,
+        .social_media {
+            @include inline;
+            p {
+                padding-top: .2em;
+                color: $grey;
+                font-size: 1.75em;
+            }
+            h3 {
+                margin-top: .25em;
+                font-weight: 700;
+                font-size: 2em;
+            }
+            a {
+                color: $purple;
+            }
+            a:hover {
+                text-decoration: none;
+                color: lighten($purple, 8%);
+            }
+        }
+
+        .social_media {
+            p {
+                margin: 0;
+            }
+            h3 {
+                padding-right: .75em;
+                @include inline;
+            }
+        }
+    }
+}
